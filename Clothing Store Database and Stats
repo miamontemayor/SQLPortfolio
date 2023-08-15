@@ -1,0 +1,16 @@
+-- Create a clothing store database
+
+CREATE TABLE clothing (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, price INTEGER);
+
+INSERT into clothing VALUES (1, "shirts",5,10);
+INSERT into clothing VALUES (2, "pants",3,12);
+INSERT into clothing VALUES (3, "skirts",2,6);
+INSERT into clothing VALUES (4, "socks", 2,2);
+INSERT into clothing VALUES (5, "tights",1,3);
+
+-- display the number of items in the database
+SELECT * FROM clothing;
+SELECT SUM(quantity) from clothing;
+
+-- display the database ordered by price
+SELECT * from clothing ORDER BY price;
