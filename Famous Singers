@@ -1,4 +1,4 @@
-#This analysis utilized the following Famous Singeer dataset:
+#This analysis utilized the following Famous Singer dataset:
 
 CREATE TABLE singers 
 (id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,13 +36,13 @@ streams INTEGER);
 
 INSERT INTO genre (person_id, name, top_song, streams) VALUES (1, "Pop", "Cruel Summer", 1200359361);
 INSERT INTO genre (person_id, name, top_song, streams) VALUES (2, "Alternative", "Summertime Sadness",1107095964);
-INSERT INTO genre (person_id, name, top_song,streams) VALUES (3, "Pop", "We Belong Together", 519102819);
-INSERT INTO genre (person_id, name, top_song,streams) VALUES (4, "Pop soul", "Someone Like You", 1697430201);
-INSERT INTO genre (person_id, name, top_song,streams) VALUES (5, "Pop rock", "Rocket Man",957421258);
+INSERT INTO genre (person_id, name, top_song, streams) VALUES (3, "Pop", "We Belong Together", 519102819);
+INSERT INTO genre (person_id, name, top_song, streams) VALUES (4, "Pop soul", "Someone Like You", 1697430201);
+INSERT INTO genre (person_id, name, top_song, streams) VALUES (5, "Pop rock", "Rocket Man",957421258);
 
 # Analysis: 
 
-# Are singer from the US or UK?
+# Are singers from the US or UK?
 SELECT singers.fullname, birthplace.name,
     CASE
         WHEN birthplace.name = "London" Then 'UK'
@@ -52,7 +52,7 @@ FROM singers
 JOIN birthplace
 ON singers.id = birthplace.person_id;
 
-# What are singers top songs and how many streams do they have?
+# What are singer's top songs and how many streams do they have?
 SELECT singers.fullname, genre.top_song,genre.streams
 FROM singers
 JOIN genre
