@@ -6,8 +6,7 @@ fullname TEXT,
 age INTEGER);
 
 INSERT INTO singers (fullname, age) VALUES ("Taylor Swift",33);
-INSERT INTO singers (fullname,age)
-VALUES ("Lana Del Rey", 38);
+INSERT INTO singers (fullname,age) VALUES ("Lana Del Rey", 38);
 INSERT INTO singers (fullname,age) VALUES ("Mariah Carey", 52);
 INSERT INTO singers (fullname,age) VALUES ("Adele", 35);
 INSERT INTO singers (fullname,age) VALUES ("Elton John", 76);
