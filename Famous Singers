@@ -1,0 +1,79 @@
+#This analysis utilized the following Famous Singeer dataset:
+
+CREATE TABLE singers 
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+fullname TEXT, 
+age INTEGER);
+
+INSERT INTO singers (fullname, age) VALUES ("Taylor Swift",33);
+INSERT INTO singers (fullname,age)
+VALUES ("Lana Del Rey", 38);
+INSERT INTO singers (fullname,age) VALUES ("Mariah Carey", 52);
+INSERT INTO singers (fullname,age) VALUES ("Adele", 35);
+INSERT INTO singers (fullname,age) VALUES ("Elton John", 76);
+
+CREATE TABLE birthplace
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+person_id INTEGER, 
+name TEXT);
+
+INSERT INTO birthplace (person_id, name) VALUES (1, "Pennsylvania");
+INSERT INTO birthplace (person_id, name)
+VALUES (2, "New York");
+INSERT INTO birthplace (person_id, name)
+VALUES (3, "New York");
+INSERT INTO birthplace (person_id, name)
+VALUES (4, "London");
+INSERT INTO birthplace (person_id, name)
+VALUES (5, "London");
+
+CREATE TABLE genre 
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+person_id INTEGER,
+name TEXT,
+top_song TEXT,
+streams INTEGER);
+
+INSERT INTO genre (person_id, name, top_song, streams) VALUES (1, "Pop", "Cruel Summer", 1200359361);
+INSERT INTO genre (person_id, name, top_song, streams) VALUES (2, "Alternative", "Summertime Sadness",1107095964);
+INSERT INTO genre (person_id, name, top_song,streams) VALUES (3, "Pop", "We Belong Together", 519102819);
+INSERT INTO genre (person_id, name, top_song,streams) VALUES (4, "Pop soul", "Someone Like You", 1697430201);
+INSERT INTO genre (person_id, name, top_song,streams) VALUES (5, "Pop rock", "Rocket Man",957421258);
+
+# Analysis: 
+
+# Are singer from the US or UK?
+SELECT singers.fullname, birthplace.name,
+    CASE
+        WHEN birthplace.name = "London" Then 'UK'
+        ELSE 'US'
+    END AS home_country
+FROM singers
+JOIN birthplace
+ON singers.id = birthplace.person_id;
+
+# What are singers top songs and how many streams do they have?
+SELECT singers.fullname, genre.top_song,genre.streams
+FROM singers
+JOIN genre
+ON singers.id = genre.person_id
+ORDER BY streams DESC;
+
+# Which singers were born in London?
+SELECT singers.fullname, birthplace.name
+FROM singers
+LEFT JOIN birthplace
+ON singers.id = birthplace.person_id
+WHERE birthplace.name = "London";
+
+#What genre does each singer belong to?
+SELECT singers.fullname, genre.name
+FROM singers
+LEFT JOIN genre
+ON singers.id = genre.person_id;
+
+#Which singers are 36 or older?
+SELECT fullname, age 
+FROM singers
+WHERE age >=36
+ORDER BY age DESC;
