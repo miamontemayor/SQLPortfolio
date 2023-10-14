@@ -66,13 +66,13 @@ LEFT JOIN birthplace
 ON singers.id = birthplace.person_id
 WHERE birthplace.name = "London";
 
-#What genre does each singer belong to?
+# What genre does each singer belong to?
 SELECT singers.fullname, genre.name
 FROM singers
 LEFT JOIN genre
 ON singers.id = genre.person_id;
 
-#Which singers are 36 or older?
+# Which singers are 36 or older?
 SELECT fullname, age 
 FROM singers
 WHERE age >=36
