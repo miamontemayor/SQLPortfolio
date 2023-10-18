@@ -1,0 +1,88 @@
+#In this SQL code, I'm querying a database that's holding digital media store data to answer questions about the data
+
+#1 Finding customers who are not in the US
+SELECT FirstName, LastName, CustomerId, Country
+FROM chinook.customers
+WHERE Country <> "USA";
+
+#Showing customers who are from Brazil
+SELECT * 
+FROM chinook.customers
+WHERE Country = "Brazil";
+
+#Finding the invoices of customers from Brazil
+SELECT FirstName, Lastname,InvoiceID, InvoiceDate, BillingCountry
+FROM chinook.customers
+INNER JOIN chinook.invoices
+ON customers.CustomerId = invoices.CustomerId
+WHERE Country = "Brazil";
+
+#Showing the employees who are Sales Agents
+SELECT *
+FROM chinook.employees
+WHERE Title = "Sales Support Agent";
+
+#Finding a distinct list of billing countries
+SELECT DISTINCT BillingCountry
+FROM chinook.invoices;
+ 
+#Finding the invoices associated with each Sales Agent
+SELECT emp.FirstName, emp.LastName, inv.invoiceId
+FROM chinook.employees emp
+JOIN chinook.customers cust
+ON cust.SupportRepId = emp.employeeId
+JOIN chinook.invoices inv
+ON inv.CustomerId = cust.CustomerId;
+
+# Showing the invoice total for each customer
+SELECT cust.FirstName, cust.LastName, cust.Country, emp.FirstName, emp.Lastname, inv.total
+FROM chinook.customers cust
+JOIN chinook.employees emp
+ON cust.SupportRepId = emp.employeeId
+JOIN chinook.invoices inv
+ON inv.CustomerId = cust.CustomerId;
+
+#Finding the number of invoices that were in the year 2009
+SELECT COUNT(invoiceId)
+FROM chinook.invoices
+WHERE InvoiceDate LIKE "%2009%";
+
+#Finding the total sales for the year 2009
+SELECT SUM (Total)
+FROM chinook.invoices
+WHERE InvoiceDate LIKE "%2009%";
+
+#Showing each track name along with it's invoice ID
+SELECT tracks.Name, inv.InvoiceLineId
+FROM chinook.invoice_items inv
+JOIN chinook.tracks
+ON inv.TrackId = tracks.TrackId;
+
+#Showing all tracks along with thier album name, media type, and invoice ID
+SELECT tracks.Name AS 'Track Name', 
+albums.Title AS 'Album Name',
+media_types.Name AS 'Media Name',
+genres.Name AS 'Genre Name'
+FROM chinook.tracks
+JOIN chinook.media_types
+ON tracks.MediatypeId = media_types.MediaTypeId
+JOIN chinook.genres
+ON tracks.GenreId = genres.GenreId
+JOIN chinook.albums
+ON tracks.AlbumId = albums.AlbumId;
+
+
+#Finding whcih Sales Agent made the most dollars in sale in 2009
+SELECT emp.FirstName, emp.LastName,
+ROUND(SUM(Inv.Total), 2) as 'Total Sales' 
+FROM chinook.Employees emp
+JOIN chinook.Customers cust 
+ON cust.SupportRepId = emp.EmployeeId
+JOIN chinook.Invoices Inv 
+ON Inv.CustomerId = cust.CustomerId
+WHERE emp.Title = 'Sales Support Agent' 
+AND Inv.InvoiceDate LIKE '2009%' 
+GROUP BY emp.FirstName
+ORDER BY (round(sum(Inv.Total), 2))  DESC LIMIT 1;
+
+
