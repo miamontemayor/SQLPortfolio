@@ -44,7 +44,7 @@ FROM BIT_DB.Spotifydata
 ORDER BY duration_ms ASC
 LIMIT 1;
 
-# Then i found the top 5 songs based on danceability
+# Then I found the top 5 songs based on danceability
 SELECT artist_name,track_name, danceability
 FROM BIT_DB.Spotifydata
 ORDER BY danceability DESC
