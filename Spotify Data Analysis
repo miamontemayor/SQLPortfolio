@@ -32,7 +32,7 @@ SELECT artist_name,track_name,avg(popularity),avg(danceability),avg(energy)
 FROM BIT_DB.spotifydata
 GROUP BY artist_name, track_name;
 
-# I then dound the top 10 artists based on popularity.
+# I then found the top 10 artists based on popularity.
 SELECT DISTINCT artist_name, popularity
 FROM BIT_DB.Spotifydata 
 ORDER BY popularity DESC
