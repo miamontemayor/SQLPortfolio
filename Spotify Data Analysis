@@ -38,7 +38,7 @@ FROM BIT_DB.Spotifydata
 ORDER BY popularity DESC
 LIMIT 10;
 
-# Next I determines which artist had realeased the shortest song
+# Next I determined which artist had realeased the shortest song
 SELECT DISTINCT artist_name
 FROM BIT_DB.Spotifydata
 ORDER BY duration_ms ASC
