@@ -1,0 +1,21 @@
+--- Patient's location by zip - SCR MG (see where patients are coming from)\
+SELECT distinct CAST(AES_DECRYPT(UNHEX(zip), 'DECRYPT_KEY_HERE') AS CHAR) Zip
+FROM staging-67_feb51f.worklist
+WHERE exam_datetime BETWEEN '2023-01-01' AND '2024-01-01'
+AND modality = 'mg' AND submodality = 's';
+
+--High Risk patient location
+SELECT distinct CAST(AES_DECRYPT(UNHEX(zip), 'DECRYPT_KEY_HERE') AS CHAR) Zip
+FROM staging-67_feb51f.worklist
+WHERE exam_datetime BETWEEN '2023-01-01' AND '2024-01-01'
+AND report_other like '%discrete_data_risk=1%';
+
+--Cancers by region
+SELECT distinct CAST(AES_DECRYPT(UNHEX(state), 'DECRYPT_KEY_HERE') AS CHAR) STATE
+FROM staging-67_feb51f.worklist
+WHERE exam_datetime BETWEEN '2023-01-01' AND '2024-01-01';
+
+-- How many are referred into practice
+SELECT distinct CAST(AES_DECRYPT(UNHEX(referring_name), 'DECRYPT_KEY_HERE') AS CHAR) Referral
+FROM staging-67_feb51f.worklist
+WHERE exam_datetime BETWEEN '2023-01-01' AND '2024-01-01';
